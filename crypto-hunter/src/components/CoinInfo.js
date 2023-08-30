@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 import { Line } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
+import { chartDays } from "../config/data";
+import SelectButton from "./SelectButton";
 
 const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
@@ -83,7 +85,32 @@ const CoinInfo = ({ coin }) => {
                   },
                 ],
               }}
+              options={{
+                elements: {
+                  point: {
+                    radius: 1,
+                  },
+                },
+              }}
             />
+            <div
+              style={{
+                display: "flex",
+                marginTop: 20,
+                justifyContent: "space-around",
+                width: "100%",
+              }}
+            >
+              {chartDays.map((day) => (
+                <SelectButton
+                  key={day.value}
+                  onClick={() => setDays(day.value)}
+                  selected={day.value === days}
+                >
+                  {day.label}
+                </SelectButton>
+              ))}
+            </div>
           </>
         )}
       </div>
